@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Chat Test</string>
+    <string name="navigation_home">홈</string>
+    <string name="navigation_people">사람</string>
+    <string name="navigation_message">메세지</string>
+    <string name="navigation_my">마이페이지</string>
+    <string name="navigation_recruit">채용</string>
+    <string name="new_massage">새 메세지</string>
+</resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@+id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.chattest.presentation.view.fragment.HomeFragment"
+        android:label="@string/navigation_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/peopleFragment"
+        android:name="com.example.chattest.presentation.view.fragment.PeopleFragment"
+        android:label="@string/navigation_people"
+        tools:layout="@layout/fragment_people" />
+
+    <fragment
+        android:id="@+id/messageFragment"
+        android:name="com.example.chattest.presentation.view.fragment.MessageFragment"
+        android:label="@string/navigation_message"
+        tools:layout="@layout/fragment_message" />
+
+    <fragment
+        android:id="@+id/myPageFragment"
+        android:name="com.example.chattest.presentation.view.fragment.MyPageFragment"
+        android:label="@string/navigation_my"
+        tools:layout="@layout/fragment_my_page" />
+
+    <fragment
+        android:id="@+id/recruitFragment"
+        android:name="com.example.chattest.presentation.view.fragment.RecruitFragment"
+        android:label="@string/navigation_recruit"
+        tools:layout="@layout/fragment_recruit" />
+
+</navigation>
