@@ -9,20 +9,20 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
-        android:id="@+id/text_view_time"
+        android:id="@+id/text_chat_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="30dp"
         android:textSize="10sp"
-        app:layout_constraintStart_toEndOf="@+id/text_view_text"
+        app:layout_constraintStart_toEndOf="@+id/text_chat_message"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:text="오전 10:00"/>
 
     <TextView
-        android:id="@+id/text_view_text"
+        android:id="@+id/text_chat_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
@@ -31,7 +31,7 @@
         app:layout_constrainedWidth="true"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintEnd_toStartOf="@+id/text_view_time"
+        app:layout_constraintEnd_toStartOf="@+id/text_chat_time"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
