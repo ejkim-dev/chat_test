@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.example.chattest.databinding.FragmentHomeBinding
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
 
     private lateinit var binding: FragmentHomeBinding
 

@@ -1,13 +1,13 @@
 package com.example.chattest.data.mapper
 
 import com.example.chattest.data.entity.UserMessageListEntity
-import com.example.chattest.domain.model.UserMessageList
+import com.example.chattest.domain.model.MessageUserInfo
 
-class UserMessageListMapper : BaseMapper<List<UserMessageListEntity>, List<UserMessageList>> {
+class UserMessageListMapper : BaseMapper<List<UserMessageListEntity>, List<MessageUserInfo>> {
 
-    override fun mapToModelFrom(entity: List<UserMessageListEntity>): List<UserMessageList> {
+    override fun mapToModelFrom(entity: List<UserMessageListEntity>): List<MessageUserInfo> {
         return entity.map {
-            UserMessageList(
+            MessageUserInfo(
                 company = it.company,
                 countUnreadChat = it.countUnreadChat,
                 id = it.id,

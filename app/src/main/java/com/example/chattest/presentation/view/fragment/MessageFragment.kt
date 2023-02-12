@@ -1,11 +1,9 @@
 package com.example.chattest.presentation.view.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LifecycleOwner
 import com.example.chattest.databinding.FragmentMessageBinding
 import com.example.chattest.presentation.adapter.ChatUserAdapter
 import com.example.chattest.presentation.model.ChatUserItemUiState
@@ -13,7 +11,7 @@ import com.example.chattest.presentation.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
-class MessageFragment : Fragment(), ChatUserAdapter.OnChatUserItemClickListener {
+class MessageFragment : BaseFragment(), ChatUserAdapter.OnChatUserItemClickListener {
 
     private lateinit var binding: FragmentMessageBinding
     private val mainViewModel: MainViewModel by sharedViewModel()
@@ -33,7 +31,6 @@ class MessageFragment : Fragment(), ChatUserAdapter.OnChatUserItemClickListener 
         super.onViewCreated(view, savedInstanceState)
         initializeUi()
         initializeData()
-        subscriberUi()
         subscribeViewModel()
     }
 
@@ -47,7 +44,7 @@ class MessageFragment : Fragment(), ChatUserAdapter.OnChatUserItemClickListener 
     }
 
     private fun subscribeViewModel() {
-        mainViewModel.messageUser.observe(this as LifecycleOwner) {
+        mainViewModel.messageUser.observe(viewLifecycleOwner) {
             val itemUiStat = it.userMessages.map { userMessage ->
                 ChatUserItemUiState(
                     id = userMessage.id,
@@ -64,15 +61,12 @@ class MessageFragment : Fragment(), ChatUserAdapter.OnChatUserItemClickListener 
         }
     }
 
-    private fun subscriberUi() {
-    }
-    
-    companion object {
-        const val TAG = "MessageFragment"
+    override fun onItemClicked(chatUserItemUiState: ChatUserItemUiState) {
+        mainViewModel.moveChatRoom(chatUserItemUiState)
     }
 
-    override fun onItemClicked(id: Int) {
-        mainViewModel.moveChatRoom(id)
+    companion object {
+        const val TAG = "MessageFragment"
     }
 
 }

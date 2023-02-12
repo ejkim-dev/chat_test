@@ -1,6 +1,6 @@
 package com.example.chattest.domain.model
 
-data class UserMessageList(
+data class MessageUserInfo(
     val company: String,
     val countUnreadChat: Int,
     val id: Int,

@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.example.chattest.R
 
 
-class PeopleFragment : Fragment() {
+class PeopleFragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

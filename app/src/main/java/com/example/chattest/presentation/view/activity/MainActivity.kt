@@ -61,16 +61,14 @@ class MainActivity : AppCompatActivity() {
         showFragment(fragment, tag)
     }
 
-    private fun showChatFragment(id: Int?) {
-        if (id == null) showToast("해당 채팅 방이 존재하지 않습니다.")
-
+    private fun showChatFragment() {
         binding.navigationBottom.hide()
-        val bundle = Bundle().apply {
+     /*   val bundle = Bundle().apply {
             putInt(KeyConstant.KEY_CHAT, id!!)
         }
 
-        val fragment = ChatFragment().apply { arguments = bundle }
-        showFragment(fragment, ChatFragment.TAG)
+        val fragment = ChatFragment().apply { arguments = bundle }*/
+        showFragment(ChatFragment(), ChatFragment.TAG)
     }
 
     private fun subscribeViewModel() {
@@ -90,9 +88,9 @@ class MainActivity : AppCompatActivity() {
                    MainUiState.ViewStatus.HOME -> showNavigationFragment(HomeFragment(), HomeFragment.TAG)
                    MainUiState.ViewStatus.PEOPLE -> showNavigationFragment(PeopleFragment(), PeopleFragment.TAG)
                    MainUiState.ViewStatus.MESSAGE -> showNavigationFragment(MessageFragment(), MessageFragment.TAG)
-                   MainUiState.ViewStatus.MYPAGE -> showNavigationFragment(MyPageFragment(), HomeFragment.TAG)
+                   MainUiState.ViewStatus.MYPAGE -> showNavigationFragment(MyPageFragment(), MyPageFragment.TAG)
                    MainUiState.ViewStatus.RECRUIT -> showNavigationFragment(RecruitFragment(), RecruitFragment.TAG)
-                   MainUiState.ViewStatus.CHAT -> showChatFragment(it.roomId)
+                   MainUiState.ViewStatus.CHAT -> showChatFragment()
                }
             }) {
                 showToast("${it.message}")

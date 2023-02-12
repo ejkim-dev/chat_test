@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chattest.R
 import com.example.chattest.databinding.ItemChatUserBinding
+import com.example.chattest.domain.model.MessageUserInfo
 import com.example.chattest.presentation.model.ChatUserItemUiState
 
 class ChatUserAdapter : ListAdapter<ChatUserItemUiState, ChatUserAdapter.ViewHolder>(
@@ -33,12 +34,12 @@ class ChatUserAdapter : ListAdapter<ChatUserItemUiState, ChatUserAdapter.ViewHol
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
         holder.itemView.setOnClickListener {
-            listener?.onItemClicked(getItem(position).id)
+            listener?.onItemClicked(getItem(position))
         }
     }
 
     interface OnChatUserItemClickListener {
-        fun onItemClicked (id: Int)
+        fun onItemClicked (chatUserItemUiState: ChatUserItemUiState)
     }
 }
 
