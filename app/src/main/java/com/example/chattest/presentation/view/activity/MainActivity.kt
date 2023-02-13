@@ -63,11 +63,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun showChatFragment() {
         binding.navigationBottom.hide()
-     /*   val bundle = Bundle().apply {
-            putInt(KeyConstant.KEY_CHAT, id!!)
-        }
-
-        val fragment = ChatFragment().apply { arguments = bundle }*/
         showFragment(ChatFragment(), ChatFragment.TAG)
     }
 

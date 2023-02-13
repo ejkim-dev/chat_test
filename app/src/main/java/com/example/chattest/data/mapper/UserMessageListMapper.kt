@@ -11,6 +11,7 @@ class UserMessageListMapper : BaseMapper<List<UserMessageListEntity>, List<Messa
                 company = it.company,
                 countUnreadChat = it.countUnreadChat,
                 id = it.id,
+                userId = it.userId,
                 job = it.job,
                 lastChatMessage = it.lastChatMessage,
                 lastChatDateTime = it.lastChatDateTime,

@@ -6,14 +6,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.chattest.domain.model.ChatData
 import com.example.chattest.domain.model.MessageUser
-import com.example.chattest.domain.model.MessageUserInfo
 import com.example.chattest.domain.usecase.ChatDataUseCase
 import com.example.chattest.domain.usecase.MessageUserUseCase
+import com.example.chattest.presentation.model.ChatItemUiState
 import com.example.chattest.presentation.model.ChatUserItemUiState
 import com.example.chattest.presentation.model.MainUiState
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.subjects.BehaviorSubject
-import io.reactivex.rxjava3.subjects.PublishSubject
 
 class MainViewModel(
     application: Application,
@@ -25,6 +24,9 @@ class MainViewModel(
 
     private val _chatData = MutableLiveData<ChatData>()
     val chatData: LiveData<ChatData> = _chatData
+
+    private val _chatItemUiState = MutableLiveData<List<ChatItemUiState>?>()
+    val chatItemUiState: LiveData<List<ChatItemUiState>?> = _chatItemUiState
 
     private val _currentMessageUser = MutableLiveData<ChatUserItemUiState>()
     val currentMessageUser: LiveData<ChatUserItemUiState> = _currentMessageUser
@@ -44,6 +46,7 @@ class MainViewModel(
     }
 
     fun getChatMessage(roomId: Int) {
+        Log.d("####", "getChatMessage: $roomId")
         getApiResult(
             chatDataUseCase.getChatData(roomId = roomId),
             success = {
@@ -52,6 +55,21 @@ class MainViewModel(
             true,
             "Chat Room"
         )
+    }
+
+    fun setChatItemUiState (chatItemUiState: List<ChatItemUiState>?) {
+        _chatItemUiState.postValue(chatItemUiState)
+    }
+
+    fun updateChatItemUiState (chatItemUiState: ChatItemUiState) {
+        Log.d("####", "updateChatItemUiState: $chatItemUiState | ${this.chatItemUiState.value == null}")
+        if (this.chatItemUiState.value == null) {
+            _chatItemUiState.postValue(listOf(chatItemUiState))
+        } else {
+            val newChatItemUiStates = this.chatItemUiState.value!!.toMutableList()
+            newChatItemUiStates.add(chatItemUiState)
+            _chatItemUiState.postValue(newChatItemUiStates)
+        }
     }
 
     fun moveChatRoom(chatUserItemUiState: ChatUserItemUiState) {

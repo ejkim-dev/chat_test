@@ -1,6 +1,7 @@
 package com.example.chattest.presentation.view.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,10 @@ import com.example.chattest.presentation.adapter.ChatUserAdapter
 import com.example.chattest.presentation.model.ChatUserItemUiState
 import com.example.chattest.presentation.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 
 
 class MessageFragment : BaseFragment(), ChatUserAdapter.OnChatUserItemClickListener {
@@ -45,12 +50,23 @@ class MessageFragment : BaseFragment(), ChatUserAdapter.OnChatUserItemClickListe
 
     private fun subscribeViewModel() {
         mainViewModel.messageUser.observe(viewLifecycleOwner) {
+            val currentDate = LocalDateTime.now()
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
+
             val itemUiStat = it.userMessages.map { userMessage ->
+                val date = LocalDate.parse(userMessage.lastChatDateTime, formatter)
+                val lastChatDate : String = when (ChronoUnit.DAYS.between(date, currentDate)) {
+                    0L -> "오늘"
+                    1L -> "어제"
+                    else -> date.toString()
+                }
+
                 ChatUserItemUiState(
                     id = userMessage.id,
+                    userId = userMessage.userId,
                     imageUrl = userMessage.profileImage,
                     name = userMessage.name,
-                    date = userMessage.lastChatDateTime,
+                    date = lastChatDate,
                     job = userMessage.job,
                     company = userMessage.company,
                     message = userMessage.lastChatMessage,

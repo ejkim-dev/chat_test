@@ -12,7 +12,7 @@ import com.example.chattest.domain.model.MessageUserInfo
 import com.example.chattest.presentation.model.ChatUserItemUiState
 
 class ChatUserAdapter : ListAdapter<ChatUserItemUiState, ChatUserAdapter.ViewHolder>(
-    ChatUserDiffUtil
+    chatUserDiffUtil
 ) {
     var listener : OnChatUserItemClickListener? = null
 
@@ -41,21 +41,24 @@ class ChatUserAdapter : ListAdapter<ChatUserItemUiState, ChatUserAdapter.ViewHol
     interface OnChatUserItemClickListener {
         fun onItemClicked (chatUserItemUiState: ChatUserItemUiState)
     }
+
+    companion object {
+        val chatUserDiffUtil = object :DiffUtil.ItemCallback<ChatUserItemUiState>() {
+            override fun areItemsTheSame(
+                oldItem: ChatUserItemUiState,
+                newItem: ChatUserItemUiState
+            ): Boolean {
+                return oldItem == newItem
+            }
+
+            override fun areContentsTheSame(
+                oldItem: ChatUserItemUiState,
+                newItem: ChatUserItemUiState
+            ): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+        }
+    }
 }
 
-object ChatUserDiffUtil : DiffUtil.ItemCallback<ChatUserItemUiState>() {
-    override fun areItemsTheSame(
-        oldItem: ChatUserItemUiState,
-        newItem: ChatUserItemUiState
-    ): Boolean {
-        return oldItem == newItem
-    }
-
-    override fun areContentsTheSame(
-        oldItem: ChatUserItemUiState,
-        newItem: ChatUserItemUiState
-    ): Boolean {
-        return oldItem.id == newItem.id
-    }
-
-}
